@@ -30,7 +30,8 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Connect to Success",
                     style: GoogleFonts.lobster(
-                      textStyle: TextStyle(fontSize: 15),
+                      textStyle: TextStyle(
+                          fontSize: 15, color: ElementColor.textColor),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -42,17 +43,18 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: "Enter Email or Username",
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30)),
-                          borderSide:
-                              BorderSide(color: Colors.white, width: 3.0)),
+                          borderSide: BorderSide(
+                              color: ElementColor.primaryColor, width: 3.0)),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         borderSide: BorderSide(
-                          color: Colors
-                              .white, // Color when the TextField is focused
+                          color: ElementColor
+                              .primaryColor, // Color when the TextField is focused
                           width: 3.0,
                         ),
                       ),
-                      prefixIcon: Icon(Icons.person, color: Colors.black),
+                      prefixIcon:
+                          Icon(Icons.person, color: ElementColor.primaryColor),
                     ),
                   ),
                   //End of Username Textbox
@@ -70,19 +72,22 @@ class _LoginPageState extends State<LoginPage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         borderSide: BorderSide(
-                          color: Colors.white,
+                          color: ElementColor.primaryColor,
                           width: 3.0,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                         borderSide: BorderSide(
-                          color: Colors
-                              .white, // Color when the TextField is focused
+                          color: ElementColor
+                              .primaryColor, // Color when the TextField is focused
                           width: 2.0,
                         ),
                       ),
-                      prefixIcon: Icon(Icons.lock, color: Colors.black),
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: ElementColor.primaryColor,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -96,7 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                       children: const [
                         Text(
                           "Forget Pasword",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: ElementColor.textColor),
                         ),
                       ],
                     ),
@@ -110,7 +117,14 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         Navigator.pushNamed(context, '/home');
                       },
-                      child: Text("Sign In")),
+                      style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all(
+                              ElementColor.primaryColor)),
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      )),
 
                   SizedBox(
                     height: 10,
@@ -127,7 +141,9 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Text(
                           "or continue with",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: ElementColor.textColor),
                         ),
                       ),
                       Expanded(
@@ -145,23 +161,31 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "Not a member?",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          'Regester now',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                        )
-                      ]),
-                      const SizedBox(height: 20.0,),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      "Not a member?",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ElementColor.textColor),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, '/Signup');
+                      },
+                      child: Text(
+                        'Regester now',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ElementColor.primaryColor),
+                      ),
+                    )
+                  ]),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
                 ],
               ),
             ),
