@@ -29,12 +29,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       theme: ThemeData(
-        canvasColor: Colors.transparent,
+          appBarTheme: const AppBarTheme(
+          elevation: 0,
+        ),
+        scaffoldBackgroundColor: Colors.transparent,
       ),
       routes: {
-        '/LoginPage': (context) =>  LoginPage(),
-        '/Signup':(context)=>  Signup(),
-        '/home':(context) =>  HomePage(),
+        '/LoginPage': (context) =>  const LoginPage(),
+        '/Signup':(context)=>  const Signup(),
+        '/home':(context) =>  const HomePage(),
       },
     );
   }

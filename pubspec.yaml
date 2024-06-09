@@ -40,6 +40,7 @@ dependencies:
   device_preview: ^1.1.0
   assets: ^0.0.1
   path_provider: ^2.1.3
+  rive: ^0.13.7
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +59,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - lib/images/google.png
+    - lib/assets/google.png
+    - lib/assets/animated_icon.riv
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

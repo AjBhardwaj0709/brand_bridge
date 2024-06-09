@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         )),
-        child: Center(
+        child: const Center(
           child: Text(
             "Brand Bridge",
             style: TextStyle(fontSize: 34),

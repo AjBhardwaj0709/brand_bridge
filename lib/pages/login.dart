@@ -42,11 +42,11 @@ class _LoginPageState extends State<LoginPage> {
                       labelStyle: TextStyle(color: Colors.white),
                       hintText: "Enter Email or Username",
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
                           borderSide: BorderSide(
                               color: ElementColor.primaryColor, width: 3.0)),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
                         borderSide: BorderSide(
                           color: ElementColor
                               .primaryColor, // Color when the TextField is focused
@@ -70,17 +70,16 @@ class _LoginPageState extends State<LoginPage> {
                       labelStyle: TextStyle(color: Colors.white),
                       hintText: "Enter your PassWord",
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
                         borderSide: BorderSide(
                           color: ElementColor.primaryColor,
                           width: 3.0,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
                         borderSide: BorderSide(
-                          color: ElementColor
-                              .primaryColor, // Color when the TextField is focused
+                          color: ElementColor.primaryColor,
                           width: 2.0,
                         ),
                       ),
@@ -156,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Image.asset(
-                      'lib/images/google.png',
+                      'lib/assets/google.png',
                       height: 40,
                     ),
                   ),
@@ -172,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, '/Signup');
                       },
                       child: Text(
