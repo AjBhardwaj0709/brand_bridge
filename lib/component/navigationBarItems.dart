@@ -10,8 +10,7 @@ class NavItemModel {
 }
 
 List<NavItemModel> bottomItems = [
-
-   NavItemModel(
+  NavItemModel(
     title: "Home",
     rive: RiveModel(
       src: "lib/assets/animated_icon.riv",
@@ -43,5 +42,4 @@ List<NavItemModel> bottomItems = [
       machine: "SETTINGS_Interactivity",
     ),
   ),
-
 ];
