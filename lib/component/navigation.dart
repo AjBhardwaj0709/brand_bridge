@@ -11,14 +11,15 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-   int _selectedIndex = 0;
-
+  int _selectedIndex = 0;
+  int index=0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  List<SMIBool> riveIconInput = [];
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -35,35 +36,56 @@ class _NavigationState extends State<Navigation> {
                 padding: const EdgeInsets.all(12),
                 margin: const EdgeInsets.symmetric(horizontal: 24),
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(24)),
-                  color: Color(0xff09203f),
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                    color: Color(0xff09203f),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xff09203f),
+                        offset: Offset(0, 20),
+                        blurRadius: 20,
+                      )
+                    ]),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                    bottomItems.length,
-                    (index) => GestureDetector(
-                      onTap: () => _onItemTapped(index),
-                      child: ColorFiltered(
-                        colorFilter: ColorFilter.mode(
-                          _selectedIndex == index
-                              ? ElementColor.primaryColor // Selected color
-                              : Colors.white54, // Unselected color
-                          BlendMode.srcIn,
-                        ),
-                        child: SizedBox(
-                          height: 36,
-                          width: 36,
-                          child: RiveAnimation.asset(
-                            bottomItems[index].rive.src,
-                            artboard: bottomItems[index].rive.artboard,
-                            stateMachines: [bottomItems[index].rive.machine],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                  children: List.generate(bottomItems.length, (index) {
+                    final riveIcon = bottomItems[index].rive;
+                    return GestureDetector(
+                      onTap: () {
+                        riveIconInput[index].change(true);
+                        Future.delayed(const Duration(seconds: 1), () {
+                          riveIconInput[index].change(false);
+                        });
+                      },
+                      child: SizedBox(
+                        height: 36,
+                        width: 36,
+                        child: RiveAnimation.asset(riveIcon.src,
+                            artboard: riveIcon.artboard, onInit: (artboard) {
+                          StateMachineController? controller =
+                              StateMachineController.fromArtboard(
+                                  artboard, riveIcon.machine);
+
+                          artboard.addController(controller!);
+
+                          riveIconInput.add(
+                              controller.findInput<bool>('active') as SMIBool);
+                        }
+                            // stateMachines: [bottomItems[index].rive.machine],
+                            ),
                       ),
-                    ),
-                  ),
+                      //  ColorFiltered(
+                      //   colorFilter: ColorFilter.mode(
+                      //     _selectedIndex == index
+                      //         ? ElementColor.primaryColor // Selected color
+                      //         : Colors.white54, // Unselected color
+                      //     BlendMode.srcIn,
+                      //   ),
+
+                    );
+                  }
+                      
+                      // ),
+                      ),
                 ),
               ),
             ),
