@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 android {
     namespace = "com.example.brand_bridge"
     compileSdk = 34  // Explicitly set the compileSdk version
-    ndkVersion = flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

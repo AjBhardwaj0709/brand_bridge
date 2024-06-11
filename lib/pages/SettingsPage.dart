@@ -1,9 +1,15 @@
-import 'package:flutter/material.dart';
+// import 'package:brand_bridge/component/navigation.dart';
 import 'package:brand_bridge/theme/theme.dart';
+import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class SettingPage extends StatefulWidget {
+  const SettingPage({super.key});
 
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,11 +17,8 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
-          'Brand Bridge',
-          style: TextStyle(
-              color: ElementColor.primaryColor,
-              fontSize: 25,
-              fontWeight: FontWeight.bold),
+          "Settings",
+          style: TextStyle(color: ElementColor.primaryColor,fontSize: 30),
         ),
         backgroundColor: Colors.transparent,
       ),

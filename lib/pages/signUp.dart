@@ -154,7 +154,7 @@ class _SignupState extends State<Signup> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Image.asset(
-                    'lib/images/google.png',
+                    'lib/assets/google.png',
                     height: 40,
                   ),
                 ),
