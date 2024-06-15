@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  const NavBar({super.key});
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -61,7 +61,7 @@ class _NavBarState extends State<NavBar> {
               child: GNav(
                 gap: 8,
                 backgroundColor:Color(0xff09203f),
-                color: ElementColor.primaryColor,
+                color: ElementColor.textColor,
                 activeColor: ElementColor.primaryColor,
                 tabBackgroundColor: ElementColor.primaryColor.withOpacity(0.1),
                 iconSize: 25,
@@ -78,8 +78,6 @@ class _NavBarState extends State<NavBar> {
           ),
         ],
       ),
-      // Page content
-      // body: _pages[_selectedIndex],
     );
   }
 }

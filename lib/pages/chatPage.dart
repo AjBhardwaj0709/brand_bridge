@@ -1,5 +1,5 @@
+// ignore: file_names
 import 'package:brand_bridge/theme/theme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {

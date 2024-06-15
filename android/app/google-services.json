@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1084930896982",
+    "project_id": "brand-bridge-6c138",
+    "storage_bucket": "brand-bridge-6c138.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084930896982:android:e1b2a43410e3d9298b77f7",
+        "android_client_info": {
+          "package_name": "com.example.brand_bri"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB36uXXwGMg0KKed9lWy9T37UWCcnyWbDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084930896982:android:6d4bf779ea18fa668b77f7",
+        "android_client_info": {
+          "package_name": "com.example.brand_bridge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB36uXXwGMg0KKed9lWy9T37UWCcnyWbDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

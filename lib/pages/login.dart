@@ -1,17 +1,58 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:brand_bridge/authentication/auth_service.dart';
+import 'package:brand_bridge/component/MyTextField.dart';
+import 'package:brand_bridge/component/my_Button.dart';
 import 'package:brand_bridge/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  final TextEditingController mailController = TextEditingController();
+  final TextEditingController pwController = TextEditingController();
+  LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
+  void login(BuildContext context) async {
+  final authService = AuthService();
+
+  // Show a loading indicator while the login process is happening
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) => Center(child: CircularProgressIndicator()),
+  );
+
+  try {
+    await authService.signInWithEmailAndPasswor(
+        mailController.text, pwController.text);
+    
+    // If login is successful, close the loading indicator
+    Navigator.of(context).pop();
+    
+    // Optionally, navigate to another screen
+    Navigator.of(context).pushReplacementNamed('/NavBar');
+  } catch (e) {
+    // Close the loading indicator
+    Navigator.of(context).pop();
+
+    // Show an error dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Login Failed'),
+        content: Text(e.toString()), // You might want to handle this better
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,26 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 10),
                   //Textbox for username:
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'UserName',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintText: "Enter Email or Username",
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          borderSide: BorderSide(
-                              color: ElementColor.primaryColor, width: 3.0)),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        borderSide: BorderSide(
-                          color: ElementColor
-                              .primaryColor, // Color when the TextField is focused
-                          width: 3.0,
-                        ),
-                      ),
-                      prefixIcon:
-                          Icon(Icons.person, color: ElementColor.primaryColor),
-                    ),
+                  MyTextField(
+                    hintText: 'Enter your Email or username',
+                    icon: Icons.person,
+                    LabelText: 'Username',
+                    obscuretext: false,
+                    controller: mailController,
                   ),
                   //End of Username Textbox
                   const SizedBox(
@@ -63,31 +90,12 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   //text box for password:
-                  TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: TextStyle(color: Colors.white),
-                      hintText: "Enter your PassWord",
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        borderSide: BorderSide(
-                          color: ElementColor.primaryColor,
-                          width: 3.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        borderSide: BorderSide(
-                          color: ElementColor.primaryColor,
-                          width: 2.0,
-                        ),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        color: ElementColor.primaryColor,
-                      ),
-                    ),
+                  MyTextField(
+                    hintText: 'Enter your Password',
+                    obscuretext: true,
+                    icon: Icons.lock,
+                    LabelText: 'Password',
+                    controller: pwController,
                   ),
                   const SizedBox(
                     height: 10,
@@ -112,18 +120,11 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home');
-                      },
-                      style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                              ElementColor.primaryColor)),
-                      child: Text(
-                        "Sign In",
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      )),
+
+                  MyButton(
+                    text: 'Sign In',
+                    onPressed: () => login(context),
+                  ),
 
                   SizedBox(
                     height: 10,

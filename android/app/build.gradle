@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -32,7 +33,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.brand_bridge"
-        minSdk = 21  // Explicitly set the minSdk version
+        minSdk = 23  // Explicitly set the minSdk version
         targetSdk = 33  // Explicitly set the targetSdk version
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
