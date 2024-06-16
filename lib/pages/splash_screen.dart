@@ -27,12 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
       await Future.delayed(const Duration(seconds: 2));
     }
 
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      Navigator.pushReplacementNamed(context, '/NavBar');
-    } else {
-      Navigator.pushReplacementNamed(context, '/LoginPage');
-    }
+    // After the splash screen, navigate to the AuthGate
+    Navigator.pushReplacementNamed(context, '/AuthGate');
   }
 
   @override
@@ -52,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: const Center(
           child: Text(
             "Brand Bridge",
-            style: TextStyle(fontSize: 34),
+            style: TextStyle(fontSize: 34, color: Colors.white),
           ),
         ),
       ),

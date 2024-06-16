@@ -1,4 +1,3 @@
-// import 'package:brand_bridge/component/navigation.dart';
 import 'package:brand_bridge/authentication/auth_service.dart';
 import 'package:brand_bridge/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +5,11 @@ import 'package:flutter/material.dart';
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
-  void logOut(BuildContext context) {
-    //get Auth Service
-
+  void logOut(BuildContext context) async {
+    // Get Auth Service
     final _auth = AuthService();
-    _auth.singOut;
-    Navigator.of(context).pushReplacementNamed('/LoginPage');
+    await _auth.signOut(); // Correctly call signOut method
+    Navigator.of(context).pushReplacementNamed('/AuthGate');
   }
 
   @override
@@ -26,8 +24,8 @@ class SettingPage extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         actions: [
-          //logout bUtton
-          IconButton(onPressed:()=> logOut(context), icon: const Icon(Icons.logout))
+          // Logout button
+          IconButton(onPressed: () => logOut(context), icon: const Icon(Icons.logout)),
         ],
       ),
       body: Container(

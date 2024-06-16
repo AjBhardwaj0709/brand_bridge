@@ -22,7 +22,9 @@ class MyTextField extends StatelessWidget {
     return TextField(
       obscureText: obscuretext,
       controller: controller,
+      style: TextStyle(color: Colors.grey),
       decoration: InputDecoration(
+        
         labelText: LabelText,
         labelStyle: TextStyle(color: Colors.white),
         hintText: hintText,

@@ -21,7 +21,7 @@ class Signup extends StatelessWidget {
     );
 
     try {
-      await _auth.signUpWithEmailAndPasswor(
+      await _auth.signUpWithEmailAndPassword(
           mailController.text, pwController.text);
 
       // If sign-up is successful, close the loading indicator

@@ -1,4 +1,5 @@
 // import 'package:brand_bridge/component/navigation.dart';
+import 'package:brand_bridge/authentication/auth_gate.dart';
 import 'package:brand_bridge/component/NavBar.dart';
 import 'package:brand_bridge/firebase_options.dart';
 import 'package:brand_bridge/pages/ProfilePage.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/ChatPage': (context) => const ChatPage(),
         '/ProfilePage': (context) => const ProfilePage(),
         '/SettingPage': (context) => const SettingPage(),
+        '/AuthGate': (context)=> AuthGate(),
       },
     );
   }

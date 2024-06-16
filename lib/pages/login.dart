@@ -4,54 +4,77 @@ import 'package:brand_bridge/authentication/auth_service.dart';
 import 'package:brand_bridge/component/MyTextField.dart';
 import 'package:brand_bridge/component/my_Button.dart';
 import 'package:brand_bridge/theme/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginPage extends StatelessWidget {
-  final TextEditingController mailController = TextEditingController();
-  final TextEditingController pwController = TextEditingController();
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
-  void login(BuildContext context) async {
-  final authService = AuthService();
-
-  // Show a loading indicator while the login process is happening
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) => Center(child: CircularProgressIndicator()),
-  );
-
-  try {
-    await authService.signInWithEmailAndPasswor(
-        mailController.text, pwController.text);
-    
-    // If login is successful, close the loading indicator
-    Navigator.of(context).pop();
-    
-    // Optionally, navigate to another screen
-    Navigator.of(context).pushReplacementNamed('/NavBar');
-  } catch (e) {
-    // Close the loading indicator
-    Navigator.of(context).pop();
-
-    // Show an error dialog
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Login Failed'),
-        content: Text(e.toString()), // You might want to handle this better
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
+  @override
+  State<LoginPage> createState() => _LoginPageState();
 }
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController mailController = TextEditingController();
+
+  final TextEditingController pwController = TextEditingController();
+
+  final authService = AuthService();
+
+// Login with credintial
+  void login(BuildContext context) async {
+    final authService = AuthService();
+
+    // Show a loading indicator while the login process is happening
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      await authService.signInWithEmailAndPassword(
+          mailController.text, pwController.text);
+
+      // If login is successful, close the loading indicator
+      Navigator.of(context).pop();
+
+      // Optionally, navigate to another screen
+      Navigator.of(context).pushReplacementNamed('/NavBar');
+    } catch (e) {
+      // Close the loading indicator
+      Navigator.of(context).pop();
+
+      // Show an error dialog
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Login Failed'),
+          content: Text(e.toString()), // You might want to handle this better
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+// Login with Google
+  void _signInWithGoogle(BuildContext context) async {
+    try {
+      await authService.signInWithGoogleAndSaveUserData();
+      // Navigate to the next screen after successful login
+      Navigator.pushReplacementNamed(context, '/NavBar');
+    } catch (e) {
+      print('Error signing in with Google: $e');
+      // Handle error (show error dialog, etc.)
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,11 +176,14 @@ class LoginPage extends StatelessWidget {
                       )),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Image.asset(
-                      'lib/assets/google.png',
-                      height: 40,
+                  GestureDetector(
+                    onTap: () => _signInWithGoogle(context),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image.asset(
+                        'lib/assets/google.png',
+                        height: 40,
+                      ),
                     ),
                   ),
 
