@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:brand_bridge/component/MyTextField.dart';
+import 'package:brand_bridge/component/forget_Password_BottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:brand_bridge/authentication/auth_service.dart';
 import 'package:brand_bridge/component/my_button.dart';
 import 'package:brand_bridge/theme/theme.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(child: CircularProgressIndicator()),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
 
     try {
@@ -34,19 +37,20 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.of(context).pop(); // Dismiss loading indicator
 
-      Navigator.pushReplacementNamed(context, '/NavBar'); // Navigate to main screen
+      Navigator.pushReplacementNamed(
+          context, '/NavBar'); // Navigate to main screen
     } catch (e) {
       Navigator.of(context).pop(); // Dismiss loading indicator
 
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('Login Failed'),
+          title: const Text('Login Failed'),
           content: Text('An error occurred: $e'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
@@ -55,47 +59,47 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _loginWithGoogle(BuildContext context) async {
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (context) => const Center(child: CircularProgressIndicator()),
-  );
-
-  try {
-    await authService.loginWithGoogle(context);
-
-    Navigator.of(context).pop(); // Dismiss loading indicator
-
-    Fluttertoast.showToast(
-      msg: 'Successfully logged in!',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 3,
-      backgroundColor: Colors.green,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-
-    Navigator.pushReplacementNamed(context, '/NavBar'); // Navigate to main screen
-  } catch (e) {
-    Navigator.of(context).pop(); // Dismiss loading indicator
-
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Google Sign-In Failed'),
-        content: Text('An error occurred: $e'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
-          ),
-        ],
-      ),
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
-  }
-}
 
+    try {
+      await authService.loginWithGoogle(context);
+
+      Navigator.of(context).pop(); // Dismiss loading indicator
+
+      Fluttertoast.showToast(
+        msg: 'Successfully logged in!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 3,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+
+      Navigator.pushReplacementNamed(
+          context, '/NavBar'); // Navigate to main screen
+    } catch (e) {
+      Navigator.of(context).pop(); // Dismiss loading indicator
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Google Sign-In Failed'),
+          content: Text('An error occurred: $e'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +118,13 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Connect to Success",
                     style: GoogleFonts.lobster(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 15,
                         color: ElementColor.textColor,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   MyTextField(
                     hintText: 'Enter your Email or username',
                     icon: Icons.person,
@@ -128,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscuretext: false,
                     controller: mailController,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   MyTextField(
                     hintText: 'Enter your Password',
                     obscuretext: true,
@@ -136,34 +140,34 @@ class _LoginPageState extends State<LoginPage> {
                     LabelText: 'Password',
                     controller: pwController,
                   ),
-                  SizedBox(height: 10),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/ForgotPassword');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            ForgetPasswordBottomSHeet.showmodalBottomSheet(context);
+                          },
+                          child: const Text(
                             "Forget Password",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: ElementColor.textColor,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   MyButton(
                     text: 'Sign In',
                     onPressed: () => login(context),
                   ),
-                  SizedBox(height: 10),
-                  Row(
+                  const SizedBox(height: 10),
+                  const Row(
                     children: [
                       Expanded(
                         child: Divider(
@@ -199,23 +203,23 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Not a member?",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ElementColor.textColor,
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, '/Signup');
                         },
-                        child: Text(
+                        child: const Text(
                           'Register now',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -225,7 +229,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
