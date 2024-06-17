@@ -1,7 +1,8 @@
 // import 'package:brand_bridge/component/navigation.dart';
+import 'dart:io';
+
 import 'package:brand_bridge/authentication/auth_gate.dart';
 import 'package:brand_bridge/component/NavBar.dart';
-import 'package:brand_bridge/firebase_options.dart';
 import 'package:brand_bridge/pages/ProfilePage.dart';
 import 'package:brand_bridge/pages/SettingsPage.dart';
 import 'package:brand_bridge/pages/chatPage.dart';
@@ -15,7 +16,14 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+              apiKey: "AIzaSyB36uXXwGMg0KKed9lWy9T37UWCcnyWbDc",
+              appId: "1:1084930896982:android:e1b2a43410e3d9298b77f7",
+              messagingSenderId: "1084930896982",
+              projectId: "brand-bridge-6c138"))
+      : await Firebase.initializeApp();
   runApp(
 //     DevicePreview(
 //       enabled: !kReleaseMode,
@@ -47,7 +55,7 @@ class MyApp extends StatelessWidget {
         '/ChatPage': (context) => const ChatPage(),
         '/ProfilePage': (context) => const ProfilePage(),
         '/SettingPage': (context) => const SettingPage(),
-        '/AuthGate': (context)=> AuthGate(),
+        '/AuthGate': (context) => AuthGate(),
       },
     );
   }

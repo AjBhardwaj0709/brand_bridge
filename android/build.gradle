@@ -4,17 +4,17 @@ buildscript {
         google()
         mavenCentral()
     }
-     dependencies { 
+    dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.15'
     }
-    }
+}
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        jcenter() // Note: jcenter is being phased out, consider removing if not needed
     }
 }
 
@@ -22,9 +22,6 @@ rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-// subprojects {
-//     project.evaluationDependsOn(":app")
-// }
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
